@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+[ -f Jenkinsfile.basic ] || { echo 'Jenkinsfile.basic is missing.' >&2; exit 1; }
+[ -f deploy ] || { echo 'deploy script is missing.' >&2; exit 1; }
+[ -f smoke-tests ] || { echo 'smoke-tests script is missing.' >&2; exit 1; }
+printf 'Smoke tests passed: required files are present.\n'

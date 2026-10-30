@@ -1,0 +1,12 @@
+* text=auto
+Jenkinsfile text eol=lf
+Jenkinsfile.basic text eol=lf
+*.sh text eol=lf
+deploy text eol=lf
+smoke-tests text eol=lf
+Dockerfile text eol=lf
+Dockerfile.jenkins-docker text eol=lf
+Dockerfile.jenkins-basic text eol=lf
+*.py text eol=lf
+requirements.txt text eol=lf
+*.yaml text eol=lf

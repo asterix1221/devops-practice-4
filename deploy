@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+TARGET="${1:-staging}"
+printf 'Simulation: deploying application to %s environment.\n' "$TARGET"

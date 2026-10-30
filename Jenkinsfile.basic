@@ -1,0 +1,54 @@
+// Simplified variant: imitates build, test, staging and production deployment.
+pipeline {
+    agent any
+
+    options {
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build: repository files are available.'
+                sh 'test -f deploy && test -f smoke-tests'
+                sh 'chmod +x deploy smoke-tests'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh './smoke-tests'
+            }
+        }
+
+        stage('Deploy to Staging') {
+            steps {
+                sh './deploy staging'
+            }
+        }
+
+        stage('Approve Production') {
+            steps {
+                input message: 'Staging step passed. Deploy to production?', ok: 'Deploy to production'
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                sh './deploy production'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished. Check Console Output and stage results.'
+        }
+        success {
+            echo 'CI/CD pipeline completed successfully.'
+        }
+        failure {
+            echo 'CI/CD pipeline failed. Check Console Output.'
+        }
+    }
+}
